@@ -1,0 +1,36 @@
+{% extends "core/base.html" %}
+
+{% block title %} {{samasya.name}}{% endblock  %}
+
+{%block content%}
+<div class="grid grid-cols-5 gap-6">
+    <div class='col-span-3'>
+        <img src="{{samasya.image.url}}" class="rounded-xl">
+    </div>
+  
+
+    <div class="col-span-1 p-8 bg-gray-100 rounded-xl">
+        <h1 class="mb-5 text-3xl">{{samasya.name}}</h1>
+        <p class="text-gray-500"><strong>Time:</strong>{{samasya.time}}</p>
+        <p class="text-blue-700">
+            <strong class="text-gray-500">Description:</strong><br>
+            {{samasya.description}}</p>
+
+            {% if request.user == samasya.submitted_by %}
+            <div class="mt-6 p-6 bg-white rounded-xl">
+                <p>This is your samasya!</p>
+                <a href="{% url 'samasya:edit' samasya.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-green-500 text-white rounded-xl">Edit</a>
+                <a href="{% url 'samasya:delete' samasya.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-red-500 text-white rounded-xl">Delete</a>
+            </div>
+        {% else %}  
+            <a href="{%url 'conversation:new' samasya.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contact Municipal</a>
+        {% endif %}
+    </div>
+</div>
+
+
+    <a href="#" class="inline-block  mt-7 px-6 py-2 text-lg font-semibold bg-blue-700 text-white rounded-xl hover:bg-blue-900">Contact Municipal</a>
+        </div>
+</div> 
+{% endblock %}  
+
